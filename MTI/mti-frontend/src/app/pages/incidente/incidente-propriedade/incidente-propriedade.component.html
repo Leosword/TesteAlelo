@@ -1,0 +1,129 @@
+<form [formGroup]="propriedade">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+    <div class="ui-grid-row">
+      <div id="containerPropriedades" class="ui-g ui-fluid">
+        <p-panel header="Informações Gerais" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+          <div class="ui-grid-row">
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Nome do Sistema</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="nomeDoSistema" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.nomeSistema"
+                  type="text" pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Tipo do Erro</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="tipoDoErro" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.tipoErro" type="text"
+                  pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Quantidade de usuários impactados</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="quantidadeUsuariosImpactados" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.quantidadeUsuariosImpactados"
+                  type="text" pInputText>
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Cidade/Estado</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="localizacao" [ngModel]="propriedadeIncidente && propriedadeIncidente.cidadeEstado" type="text"
+                  pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Endereço</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="endereco" [ngModel]="propriedadeIncidente && propriedadeIncidente.endereco" type="text"
+                  pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Quantidade de usuários trabalhando no momento</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="quantidadeUsuariosTrabalhandoNoMomento" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.quantidadeUsuariosTrabalhandoMomento"
+                  type="text" pInputText>
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Problema ocorre em todas as máquinas</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="problemaOcorreEmTodasMaquinas" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.problemaOcorreTodasMaquinas"
+                  type="text" pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Departamento inteiro com o mesmo problema</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="departamentoInteiroComMesmoProblema" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.departamentoInteiroMesmoProblema"
+                  type="text" pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Quantas máquinas ocorre o problema</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="quantidadeDeMaquinasComProblema" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.seNaoEmQuantasMaquinasOcorreProblema"
+                  type="text" pInputText>
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Erro ocorre com outros colaboradores</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="erroOcorreComOutrosColaboradores" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.esteErroOcorreOutrosColaboradoresContratosTerminais"
+                  type="text" pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Login de acesso dos usuários impactados</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="loginDeAcessoImpactado" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.loginAcessoUsuariosImpactados"
+                  type="text" pInputText>
+              </div>
+            </div>
+            <div class="ui-g-4 ui-md-4 ui-sm-12">
+              <label class="control-label">Funcionalidade com erro</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="funcionalidadeComErro" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.funcionalidadeErro"
+                  type="text" pInputText>
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-g-6 ui-md-6 ui-sm-12">
+              <label class="control-label">Data e hora do inicio da falha</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="dataHoraInicioFalha" [(ngModel)]="propriedadeIncidente && propriedadeIncidente.dataHorarioInicioFalha"
+                  type="text" pInputText>
+              </div>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-sm-12">
+              <label class="control-label">Nome da empresa prestadora de serviço</label>
+              <div class="ui-inputgroup">
+                <input readonly formControlName="nomeDaEmpresaPrestadoraDeServico" [ngModel]="propriedadeIncidente && propriedadeIncidente.nomeEmpresaPrestadoraServico"
+                  type="text" pInputText>
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-g-12 ui-md-12 ui-sm-12">
+              <label class="control-label">Exemplos</label>
+              <div class="ui-inputgroup">
+                <textarea readonly formControlName="exemplos" [ngModel]="propriedadeIncidente && propriedadeIncidente.liste5Exemplos" type="text"
+                  pInputText></textarea>
+              </div>
+            </div>
+          </div>
+        </p-panel>
+      </div>
+    </div>
+  </div>
+</form>

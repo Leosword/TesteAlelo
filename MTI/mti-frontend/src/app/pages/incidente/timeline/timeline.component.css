@@ -1,0 +1,7 @@
+p-panel /deep/.ui-panel .ui-panel-content{
+    background: #CCCCCC
+}
+
+p-panel /deep/.ui-panel.ui-widget{
+    margin-top: 20px;
+}

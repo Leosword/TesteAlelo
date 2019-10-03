@@ -1,0 +1,33 @@
+#novaComponentContainer{
+    width: 100%;
+    padding: 0
+}
+
+p-dialog /deep/.ui-dialog.ui-widget .ui-dialog-content{
+    padding: 0
+}
+
+p-panel /deep/.ui-widget-header{
+    background: linear-gradient(to bottom, #063964 0%, #005193 100%) !important;
+    color: white
+} 
+p-tabview /deep/.ui-tabview .ui-tabview-panel{
+    padding: 0.5rem !important
+}
+
+#novaComponentContainer /deep/.ui-grid-row{
+    font-size:  1.2rem
+}
+
+#novaComponentContainer /deep/.ui-grid-row /deep/label{
+    margin-bottom: 0 !important
+}
+
+p-tabview{
+    width: 100%
+}
+
+textarea{
+    height: 100px;
+    resize: none
+}

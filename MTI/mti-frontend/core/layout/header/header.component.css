@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+.sidebar-right-toggle {
+  float: right;
+}
+
+.sidebar-right-toggle a {
+  padding: 15px;
+  display: block;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.main-header .logo{
+  background-color: #063964;
+}
+
+.main-header .navbar{
+  background-color: #005193;
+}
+.main-header .sidebar-toggle:hover{
+  background-color: #005193;
+}

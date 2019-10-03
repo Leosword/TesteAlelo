@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>MTI</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="app/favicon.ico">
+  <style>
+    .input-group-addon {
+      background-color: #FFFFFF;
+      border: 1px solid #E3E3E3;
+      border-radius: 30px !important;
+      border-bottom-right-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+      color: #555555;
+      padding: -0.5rem 0 -0.5rem -0.3rem;
+      -webkit-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      -moz-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      -o-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      -ms-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+<script>
+  $(window).on('load', function () {
+    $(".sidebar").slimScroll({
+      alwaysVisible: false
+    });
+  });
+
+
+  $(window).resize(function () {
+    setInterval(function () {
+      $(".sidebar").slimScroll({
+        alwaysVisible: false
+      });
+    }, 1000);
+
+  });
+</script>
+
+</html>

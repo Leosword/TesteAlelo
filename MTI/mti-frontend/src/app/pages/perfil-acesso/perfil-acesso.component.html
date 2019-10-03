@@ -1,0 +1,86 @@
+<p-blockUI [blocked]="blockedPanel">
+  <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="position:absolute;top:50%;left:50%; color: white"></i>
+</p-blockUI>
+<mk-box [isCollapsable]="false" [isRemovable]="false">
+  <header id="headerIncidentes">
+    <div class="ui-grid-row">
+      <div id="tituloTabela" class="ui-g-6 ui-md-6">
+        <i class="fa fa-table"></i>
+        Gerenciamento de Perfil
+      </div>
+      <div class="ui-g-6 ui-md-6">
+      </div>
+    </div>
+  </header>
+  <!-- <ul class="timeline">  
+      <li *ngFor="let perfil of perfis">
+          <i class="fa fa-envelope bg-blue"></i>
+          <div class="timeline-item">
+              <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+  
+              <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
+  
+              <div class="timeline-body">
+                  ...
+                  {{perfil.nome}}
+              </div>
+  
+              <div class="timeline-footer">
+                  <a class="btn btn-primary btn-xs">...</a>
+              </div>
+          </div>
+      </li>
+  
+      ...
+  
+  </ul> -->
+  <p-table #dt [columns]="colunas" [value]="perfis" [rowsPerPageOptions]="[5,20,30]" [autoLayout]="true" dataKey="id" [paginator]="true"
+    [rows]="30" [responsive]="true" [(selection)]="perfisSelecionados" [globalFilterFields]="['id','qtdeEventosFilhos', 'dataAbertura', 'incidentes', 'duracao', 'nomesAplicacoes', 'nomesLocalidades', 'nomeResponsavelTratamento']">
+    <ng-template pTemplate="caption">
+      <div class="row">
+        <div class="col-lg-6 botoesAcao">
+          <button *ngIf="permissaoBtnNovo" class="ui-button-success" type="button" pButton icon="fa-plus" (click)="adicionar()" label="Novo Perfil"></button>
+        </div>
+
+        <div class="col-lg-6 filtroGlobal">
+          <div class="ui-inputgroup" style="float: right">
+            <span class="ui-inputgroup-addon" style="width: 30px;">
+              <i class="fa fa-search"></i>
+            </span>
+            <input type="text" size="50" pInputText placeholder="Filtro" (input)="dt.filterGlobal($event.target.value, 'contains')">
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 2.25em">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center" [ngClass]="col.field === 'iconFlAtivo' || col.field === 'dataCriacao' || col.field === 'id' ? 'colunasFixas' : 'colunasDinamicas'">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th style="text-align: center; width: 100px">Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-evento let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td>
+          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns" [ngClass]="col.field === 'iconFlAtivo' || col.field === 'sla' ? 'tableCentralizada' : 'tableEsquerda'">
+          <span [innerHTML]="col.field === 'dataCriacao' ? (rowData[col.field] | date:'dd/MM/yyyy HH:mm:ss') : rowData[col.field]"></span>
+        </td>
+        <td style="text-align: center; width: 100px">
+            <i class="fa fa-eye visualizar" *ngIf="permissaoBtnVisualizar" (click)="editar(rowData, true)" pTooltip="Visualizar Perfil" tooltipPosition="left" aria-hidden="true"></i>
+            <i class="fa fa-pencil edicao" *ngIf="permissaoBtnEditar" (click)="editar(rowData, false)" pTooltip="Editar Perfil" tooltipPosition="left" aria-hidden="true"></i>
+            <i class="fa fa-times desativar" *ngIf="permissaoBtnDesativar" (click)="desativarPerfil(rowData)" pTooltip="Desativar Perfil" aria-hidden="true"></i>
+            <i class="fa fa-plus ativar" *ngIf="permissaoBtnAtivar" (click)="ativarPerfil(rowData)" pTooltip="Ativar Perfil" aria-hidden="true"></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</mk-box>
+
+<mti-novo-perfil-acesso *ngIf="displayDialog" [tbMenu]="tbMenu" [modoVisualizacao]="modoVisualizacao" [listaFuncionalidadesAssociadas]="listaFuncionalidadesAssociadas" [idPerfil]="idPerfil" [tituloModal]="tituloModal" [perfil]="perfilSelecionado" [displayDialog]="displayDialog" (salvarPerfilNotificacao)="obterTodos()"></mti-novo-perfil-acesso>

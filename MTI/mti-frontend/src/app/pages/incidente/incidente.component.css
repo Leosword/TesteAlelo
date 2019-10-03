@@ -1,0 +1,156 @@
+p-table /deep/.ui-widget{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    
+}
+
+p-table /deep/th{
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+p-table /deep/p-table{
+    width: 100%
+}
+
+p-table /deep/p-table div{
+    background: linear-gradient(to bottom, #72AFD2 0%, #72AFD2 100%);
+    color: white;
+    text-align: left
+}
+
+p-table /deep/p-table tfoot{
+    font-size: 2px
+}
+
+mk-box-info /deep/.info-box {
+    color: white
+}
+
+mk-box /deep/.box-body {
+    padding: 2px;
+}
+
+#tituloTabela{
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0;
+}
+
+#dataAtualizacao{
+    text-align: right;
+    font-size: 1.2rem;
+    padding: 3px 3px 0px 0px;
+}
+#colunaVazia{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: red;
+}
+
+.old-car {
+    background-color: #1CA979 !important;
+    color: #ffffff !important;
+    display: none
+}
+
+p-growl /deep/.ui-growl{
+    top: 55px;
+    right: 5px;
+    width: 350px
+}
+
+@media screen and (max-width: 800px) {
+    p-growl /deep/.ui-growl{
+        top: 105px;
+        right: 5px;
+        width: 350px
+    }
+  }
+
+p-growl /deep/.ui-growl-image{
+    top: 0.6em;
+}
+
+.ui-inputgroup{
+    float: right
+}
+
+.filtroGlobal{
+    padding-right: 8px;
+}
+
+.switchButton{
+    text-align: left;
+    padding-left: 8px;
+}
+
+.validaGi{
+    color: #3C8DBC  !important;
+    font-size: 1.6rem;
+    line-height: 25px;
+    cursor: pointer
+}
+
+.validaGiReprovado{
+    /* color: #DE4B39  !important; */
+    font-size: 1.6rem;
+    line-height: 25px;
+    cursor: pointer
+}
+
+.validaEps{
+    color: #F19B2C  !important;
+    font-size: 1.6rem;
+    line-height: 25px;
+    cursor: pointer
+}
+
+.incidenteAprvado{
+    /* color: #6CB33E  !important; */
+    font-size: 1.6rem;
+    line-height: 25px;
+    cursor: pointer
+}
+
+.emAnalise{
+    color: #222D32  !important;
+    font-size: 1.6rem;
+    line-height: 25px;
+    cursor: pointer
+}
+
+.colunaSla{
+    text-align: center
+}
+.colunaStatusFluxo{
+    display: none
+}
+
+p-multiselect{
+    height: 26px;
+}
+
+p-multiselect /deep/label{
+    font-weight: normal;
+    color: #898989;;
+}
+
+.filtros{
+    width: 100%
+}
+
+.filtroGlobal /deep/.col-lg-5{
+    padding: 0
+}
+.filtroGlobal /deep/.col-lg-7{
+    padding: 0
+}
+
+p-selectbutton /deep/.ui-buttonset .ui-button{
+    height: 28px;
+}
+
+p-selectbutton /deep/.ui-button-text-only .ui-button-text{
+    line-height: 20px;
+}

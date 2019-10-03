@@ -1,0 +1,136 @@
+<p-dialog header="{{tituloModal}}" [positionTop]="60" [(visible)]="displayDialog" [responsive]="true" appendTo="body" [modal]=true
+    showEffect="fade" [width]="700">
+
+    <form [formGroup]="userform" novalidate (ngSubmit)="salvar()">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            <div class="ui-grid-row">
+                <div id="novoComponentContainer" class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Nome</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </span>
+                            <input formControlName="txtNome" [(ngModel)]="configuracaoLdap && configuracaoLdap.nome" type="text" pInputText placeholder="Digite o nome da Configuração Ldap">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['txtNome'].valid&&userform.controls['txtNome'].dirty">
+                                <i class="fa fa-close"></i>
+                                O nome da Configuração Ldap é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Endereço provedor</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </span>
+                            <input formControlName="txtEnderecoProvedor" [(ngModel)]="configuracaoLdap && configuracaoLdap.enderecoProvedor" type="text"
+                                pInputText placeholder="Digite o endereço do provedor da Configuração Ldap">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['txtEnderecoProvedor'].valid&&userform.controls['txtEnderecoProvedor'].dirty">
+                                <i class="fa fa-close"></i>
+                                O endereço do provedor da Configuração Ldap é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Base</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </span>
+                            <input formControlName="txtBase" [(ngModel)]="configuracaoLdap && configuracaoLdap.base" type="text" pInputText placeholder="Digite a base da Configuração Ldap">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['txtBase'].valid&&userform.controls['txtBase'].dirty">
+                                <i class="fa fa-close"></i>
+                                A base da Configuração Ldap é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Nome atributo login</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </span>
+                            <input formControlName="txtNomeAtributoLogin" [(ngModel)]="configuracaoLdap && configuracaoLdap.nomeAtributoLogin" type="text"
+                                pInputText placeholder="Digite o nome do atributo do login da Configuração Ldap">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['txtNomeAtributoLogin'].valid&&userform.controls['txtNomeAtributoLogin'].dirty">
+                                <i class="fa fa-close"></i>
+                                O nome do atributo do login da Configuração Ldap é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Domínio Ldap</label>
+                        <div class="ui-inputgroup">
+                            <span style="height: 30px" class="ui-inputgroup-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </span>
+                            <p-dropdown formControlName="ddlDominioLdap" optionLabel="nome" [options]="dominioLdapList" [(ngModel)]="configuracaoLdap && configuracaoLdap.dominioLdap"
+                                placeholder="Selecione um Domínio Ldap" [style]="{'width':'100%'}"></p-dropdown>
+                            <button style="height: 30px" pButton type="button" icon="fa-plus" class="ui-button-sucess" (click)="adicionarNovoDominioLdap()"></button>
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['ddlDominioLdap'].valid&&userform.controls['ddlDominioLdap'].dirty">
+                                <i class="fa fa-close"></i>
+                                É necessário selecionar um novo Domínio Ldap.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Usuário</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-users"></i>
+                            </span>
+                            <input formControlName="txtUsuario" [(ngModel)]="configuracaoLdap && configuracaoLdap.usuario" type="text" pInputText placeholder="Digite o usuário da Configuração Ldap">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['txtUsuario'].valid&&userform.controls['txtUsuario'].dirty">
+                                <i class="fa fa-close"></i>
+                                O usuário da Configuração Ldap é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Senha</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </span>
+                            <input type="password" pPassword formControlName="txtSenha" [(ngModel)]="configuracaoLdap && configuracaoLdap.senha" type="text"
+                                pInputText placeholder="Digite a senha da Configuração Ldap">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['txtSenha'].valid&&userform.controls['txtSenha'].dirty">
+                                <i class="fa fa-close"></i>
+                                A senha da Configuração Ldap é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button pButton type="button" (click)="closeModal()" label="Cancelar" class="ui-button-secondary"></button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:right; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="!userform.valid || !dadosComunsRef.userform.valid"></button>
+                </div>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>
+<div *ngIf="displayDialogNovoDominioLdap">
+    <diario-novo-dominio-ldap [tituloModal]="tituloModalNovoDominioLdap" [dominioLdap]="dominioLdapSelecionado" [displayDialog]="displayDialogNovoDominioLdap"
+        (salvarDominioLdapNotificacao)="obterTodosDominiosLdap()"></diario-novo-dominio-ldap>
+</div>

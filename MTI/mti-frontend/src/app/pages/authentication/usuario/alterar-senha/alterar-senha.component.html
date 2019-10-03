@@ -1,0 +1,52 @@
+<p-dialog header="{{tituloModal}}" [contentStyle]="{'padding': '0', 'overflow-x':'hidden'}" (onHide)="closeModal()" [(visible)]="displayDialog"
+    [responsive]="true" appendTo="body" [modal]=true showEffect="fade" [width]="400">
+    
+    <form [formGroup]="userform" novalidate (ngSubmit)="salvar()">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            <div class="ui-grid-row">
+                <div id="novoFormContainer" class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Nova Senha</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <input formControlName="nSenha" [(ngModel)]="usuario && usuario.senha" pPassword type="password" pInputText placeholder="Digite uma nova Senha" promptLabel="Digite uma nova Senha" weakLabel="Fraca" mediumLabel="Média" strongLabel="Segura">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['nSenha'].valid&&userform.controls['nSenha'].dirty">
+                                <i class="fa fa-close"></i>
+                                O campo é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Confirmar Senha</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-code-fork"></i>
+                            </span>
+                            <input formControlName="cSenha" [(ngModel)]="usuario && usuario.confirmaSenha" type="password" pInputText placeholder="Confirme a Senha">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['cSenha'].valid&&userform.controls['cSenha'].dirty">
+                                <i class="fa fa-close"></i>
+                                O campo é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="row footer">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button pButton type="button" (click)="closeModal()" label="Cancelar" class="ui-button-secondary botaoFooter"></button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:right; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button pButton type="submit" label="Salvar" class="ui-button-success botaoFooter" [disabled]="!userform.valid"></button>
+                </div>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>

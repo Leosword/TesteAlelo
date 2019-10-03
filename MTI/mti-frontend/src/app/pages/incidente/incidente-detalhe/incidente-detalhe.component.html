@@ -1,0 +1,155 @@
+<p-growl sticky=true life=4000></p-growl>
+<p-dialog header="{{tituloModal}}" [positionTop]="60" [(visible)]="displayDialog" [responsive]="true" appendTo="body" [modal]=true
+showEffect="fade" [closeOnEscape]="false" (onHide)="closeModal()" [contentStyle]="{'max-height':'80vh', 'padding':'0', 'overflow-x':'hidden'}" [width]="1000">
+
+<form [formGroup]="userform" novalidate>
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+    <div class="ui-grid-row">
+      <div id="novaComponentContainer" class="ui-g ui-fluid">
+        <p-tabView>
+          <p-tabPanel header="Detalhes do Incidente" leftIcon="fa-list-alt">
+            <p-panel header="Informações Gerais" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+              <div class="ui-grid-row">
+                <div class="ui-g-8 ui-md-8 ui-sm-12">
+                  <label class="control-label">Área do Incidente</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="areaIncidente" [(ngModel)]="detalheEventos && detalheEventos.areaIncidente" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Status</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="status" [(ngModel)]="detalheEventos && detalheEventos.status" type="text" pInputText>
+                  </div>
+                </div>
+              </div>
+            </p-panel>
+            <p-panel header="Contato" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+              <div class="ui-grid-row">
+                <div class="ui-g-6 ui-md-6 ui-sm-12">
+                  <label class="control-label">Usuário final afetado</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="usuarioFinalAfetado" [(ngModel)]="detalheEventos && detalheEventos.usuarioFinalAfetado" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-3 ui-md-3 ui-sm-12">
+                  <label class="control-label">Localização</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="localizacao" [(ngModel)]="detalheEventos && detalheEventos.localizacao" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-3 ui-md-3 ui-sm-12">
+                  <label class="control-label">Email</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="email" [(ngModel)]="detalheEventos && detalheEventos.email" type="text" pInputText>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-grid-row">
+                <div class="ui-g-8 ui-md-8 ui-sm-12">
+                  <label class="control-label">Departamento</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="departamento" [(ngModel)]="detalheEventos && detalheEventos.departamento" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Telefone</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="telefone" [(ngModel)]="detalheEventos && detalheEventos.telefone" type="text" pInputText>
+                  </div>
+                </div>
+              </div>
+            </p-panel>
+            <p-panel header="Resumo" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+              <div class="ui-grid-row">
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Relatado por</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="relatadoPor" [(ngModel)]="detalheEventos && detalheEventos.relatadoPor" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Responsável</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="responsavel" [(ngModel)]="detalheEventos && detalheEventos.responsavel" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Grupo</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="grupo" [(ngModel)]="detalheEventos && detalheEventos.grupo" type="text" pInputText>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-grid-row">
+                <!-- <div class="ui-g-4 ui-md-4">
+                  <label class="control-label">Chamado Devolvido</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="nome" [(ngModel)]="detalheEventos && detalheEventos.nome" type="text" pInputText>
+                  </div>
+                </div> -->
+                <div class="ui-g-6 ui-md-6 ui-sm-12">
+                  <label class="control-label">Aberto por</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="abertoPor" [(ngModel)]="detalheEventos && detalheEventos.abertoPor" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-sm-12">
+                  <label class="control-label">PA</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="pa" [(ngModel)]="detalheEventos && detalheEventos.pa" type="text" pInputText>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-grid-row">
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Data da Abertura</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="dataAbertura" [ngModel]="detalheEventos && detalheEventos.dataAbertura | date:'dd/MM/yyyy HH:mm:ss'" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Última modificação</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="ultimaModificacao" [ngModel]="detalheEventos && detalheEventos.ultimaModificacao | date:'dd/MM/yyyy HH:mm:ss'" type="text" pInputText>
+                  </div>
+                </div>
+                <div class="ui-g-4 ui-md-4 ui-sm-12">
+                  <label class="control-label">Data da Violação do SLA</label>
+                  <div class="ui-inputgroup">
+                    <input readonly formControlName="dataViolacaoSLA" [ngModel]="detalheEventos && detalheEventos.dataViolacaoSla | date:'dd/MM/yyyy HH:mm:ss'" type="text" pInputText>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-grid-row">
+                <div class="ui-g-12 ui-md-12 ui-sm-12">
+                  <label class="control-label">Descrição</label>
+                  <div class="ui-inputgroup">
+                      <textarea readonly formControlName="descricao" [ngModel]="detalheEventos && detalheEventos.descricao" type="text" pInputText></textarea>
+                  </div>
+                </div>
+              </div>
+            </p-panel>
+          </p-tabPanel>
+          <p-tabPanel header="Propriedades" leftIcon="fa-file-text-o">
+            <app-mti-incidente-propriedade [idIncidente]="idIncidente" [numeroIncidente]="numeroIncidente" [propriedadeIncidente]="propriedade" [persistentId]="persistentId"></app-mti-incidente-propriedade>
+          </p-tabPanel>
+          <p-tabPanel *ngIf="flIncidentePai=='S'" header="Incidentes Relacionados" leftIcon="fa-file-text-o">
+            <mti-incidentes-relacionados [numeroIncidente]="numeroIncidente" [flIncidentePai]="flIncidentePai"></mti-incidentes-relacionados>
+          </p-tabPanel>
+          <p-tabPanel header="Logs" leftIcon="fa-cubes">
+            <mti-logs [idIncidente]="idIncidente" [numeroIncidente]="numeroIncidente" [persistentId]="persistentId"></mti-logs>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row" style="padding: 0px 20px 10px 20px">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+        <button pButton type="button" (click)="closeModal()" label="Fechar" class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </p-footer>
+</form>
+</p-dialog>

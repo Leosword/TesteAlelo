@@ -1,0 +1,58 @@
+<p-dialog header="{{tituloModal}}" [contentStyle]="{'background': '#CCCCCC'}" [(visible)]="displayDialog" (onHide)="closeModal()"
+    [responsive]="true" appendTo="body" [modal]=true showEffect="fade" [width]="1200">
+    <ul class="timeline">
+        <li *ngFor="let tlPai of timeLine; let first = first;" [value]="tlPai.id">
+            <i class="fa {{tlPai.icone}}"></i>
+            <div class="timeline-item">
+                <span class="time">
+                    <i class="fa fa-clock-o"></i> {{tlPai.dataCriacao | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+                <h3 class="timeline-header" *ngIf="tlPai.icone == 'fa-comments bg-yellow'">
+                    <a>Gestão de Incidentes ...</a>
+                </h3>
+                <h3 class="timeline-header" *ngIf="tlPai.icone != 'fa-comments bg-yellow'">
+                    <a>Análise EPS ...</a>
+                </h3>
+                <div class="timeline-body">
+                    {{tlPai.comentario}}
+                    <div *ngIf="first">
+                        <p-panel *ngFor="let incidente of incidentesFilhos" (onBeforeToggle)="carregaTimeLineFilha($event, incidente.id)" collapsed=true
+                            [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+                            <p-header>
+                                <i class="fa fa-lg fa-book text-green" aria-hidden="true"></i>
+                                <strong>Incidente Relacionado - ({{incidente.numeroIncidente}})</strong> 
+                            </p-header>
+                            <ul class="timeline">
+                                <li *ngFor="let tlFilha of timeLineFilha">
+                                    <i class="fa {{tlFilha.icone}}"></i>
+                                    <div class="timeline-item">
+                                        <span class="time">
+                                            <i class="fa fa-clock-o"></i> {{tlFilha.dataCriacao | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+
+                                        <h3 class="timeline-header" *ngIf="tlFilha.icone == 'fa-comments bg-yellow'">
+                                            <a>Gestão de Incidentes ...</a>
+                                        </h3>
+                                        <h3 class="timeline-header" *ngIf="tlFilha.icone != 'fa-comments bg-yellow'">
+                                            <a>Análise EPS ...</a>
+                                        </h3>
+
+                                        <div class="timeline-body">
+                                            {{tlFilha.comentario}}
+                                        </div>
+
+                                        <!-- <div class="timeline-footer">
+                                          <a class="btn btn-primary btn-xs">...</a>
+                                      </div> -->
+                                    </div>
+                                </li>
+                            </ul>
+                        </p-panel>
+                    </div>
+                </div>
+
+                <div class="timeline-footer">
+                    <p-button *ngIf="tlPai.anexos.length > 0" icon="fa fa-paperclip" label="Visualizar Anexo" (click)="abrirAnexo(tlPai.anexos)"></p-button>
+              </div>
+            </div>
+        </li>
+    </ul>
+</p-dialog>

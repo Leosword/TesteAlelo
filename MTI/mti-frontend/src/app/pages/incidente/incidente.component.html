@@ -1,0 +1,171 @@
+<p-blockUI [blocked]="blockedPanel">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="position:absolute;top:50%;left:50%; color: white"></i>
+</p-blockUI>
+<p-growl sticky=true life=4000></p-growl>
+<mk-box [isCollapsable]="false" [isRemovable]="false">
+    <header id="headerIncidentes">
+        <div class="ui-grid-row">
+            <div id="tituloTabela" class="ui-g-6 ui-md-6">
+                <i class="fa fa-table"></i>
+                Painel de Incidentes (Total:
+                <span style="color: red">{{qtdResultados}}</span>)
+            </div>
+            <div id="dataAtualizacao" class="ui-g-6 ui-md-6">
+                <i class="fa fa-history"></i>
+                Atualizado - {{today | date:'dd/MM/yyyy HH:mm:ss'}}
+            </div>
+        </div>
+    </header>
+    <p-table #dt [columns]="colunasSelecionadas" rowHover="true" [value]="eventos" dataKey="numeroIncidente" [autoLayout]="true"
+        [responsive]="true" [paginator]="true" [rows]="30" [globalFilterFields]="['numeroIncidente','areaIncidente', 'status', 'grupo', 'dataAbertura', 'dataUltimoDirecionamento', 'slaViolado', 'departamento']">
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col-lg-6 switchButton">
+                    <p-selectButton (onOptionClick)="tipoListaIncidente($event)" [options]="types" [(ngModel)]="selectedType"></p-selectButton>
+                </div>
+                <div class="col-lg-6 filtroGlobal">
+                    <div class="col-lg-7">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon" style="width: 30px;">
+                                <i class="fa fa-search"></i>
+                            </span>
+                            <input class="filtros" type="text" size="50" pInputText placeholder="Filtro" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon" style="width: 28px;">
+                                <i class="fa fa-filter"></i>
+                            </span>
+                            <p-multiSelect [options]="colunas" [(ngModel)]="colunasSelecionadas" optionLabel="header" selectedItemsLabel="Filtrar Colunas"
+                                [style]="{'minWidth': '190px', 'height': '29px'}" defaultLabel="Filtrar Colunas"></p-multiSelect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div style="text-align: right">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Filtro" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div> -->
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 2.25em"></th>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.field == 'tbStatusFluxo' ? 'colunaStatusFluxo' : ''">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th style="text-align: center; width: 80px">Situação Incidente</th>
+                <th style="text-align: center; width: 50px">Time Line</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+            <tr>
+                <td>
+                    <a href="#" [pRowToggler]="rowData" (click)="obterChamadoFilho(rowData)">
+                        <i *ngIf="rowData.flIncidentePai=='S'" [ngClass]="expanded ? 'fa fa-minus-circle' : 'fa fa-plus-circle'" style="font-size: 1.25em"></i>
+                    </a>
+                </td>
+                <td (click)="editar(rowData)" *ngFor="let col of columns" [ngClass]="col.field == 'iconStatusEvento'? 'colunaSla' : col.field == 'tbStatusFluxo' ? 'colunaStatusFluxo' : ''">
+                    <span [innerHTML]="col.field === 'dataAbertura' ? (rowData[col.field] | date:'dd/MM/yyyy HH:mm:ss') : col.field === 'dataUltimaModificacao'
+                    ? (rowData[col.field] | date:'dd/MM/yyyy HH:mm:ss') : col.field === 'dataViolacaoSLA' ? (rowData[col.field] | date:'dd/MM/yyyy HH:mm:ss') : getValor(rowData[col.field], col.field)"></span>
+                </td>
+                <td style="text-align: center; width: 80px">
+                    <i [ngClass]="rowData.tbStatusFluxo.nome == 'REPROVADO' ? 'fa fa-times-circle validaGiReprovado text-red' : 'fa fa-pencil-square-o validaGi'"
+                        *ngIf="permissaoBtnSolicitaValidacaoEPS && rowData.tbStatusFluxo.nome == 'NOVO_INCIDENTE' || permissaoBtnSolicitaValidacaoEPS && rowData.tbStatusFluxo.nome == 'REPROVADO'"
+                        (click)="validaGi(rowData)" pTooltip="{{rowData.tbStatusFluxo.nome == 'NOVO_INCIDENTE' ? 'Solicitar Validação EPS' : 'Incidente Reprovado pela EPS'}}"
+                        tooltipPosition="left" aria-hidden="true"></i>
+                    <i class="fa fa-exclamation-circle validaEps" *ngIf="permissaoBtnValidaIncidente && rowData.tbStatusFluxo.nome == 'ACIONAMENTO_EPS_EFETIVADO'"
+                        (click)="validaEps(rowData)" pTooltip="Validar Incidente" tooltipPosition="left" aria-hidden="true"></i>
+                    <i [ngClass]="rowData.tbStatusFluxo.nome == 'APROVADO' ? 'fa fa-check-circle incidenteAprvado text-green' : 'fa fa-share emAnalise'"
+                        *ngIf="rowData.tbStatusFluxo.nome == 'APROVADO' || !permissaoBtnSolicitaValidacaoEPS && rowData.tbStatusFluxo.nome != 'ACIONAMENTO_EPS_EFETIVADO'"
+                        pTooltip="{{rowData.tbStatusFluxo.nome == 'APROVADO' ? 'Incidente Aprovado pela EPS' : 'Aguardando Análise'}}"
+                        tooltipPosition="left" aria-hidden="true"></i>
+                </td>
+                <td style="text-align: center; width: 50px">
+                    <i (click)="visualizaTimeLine(rowData)" class="fa fa-lg fa-code-fork" aria-hidden="true" pTooltip="Visualizar TimeLine" tooltipPosition="left"></i>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+            <tr>
+                <td [attr.colspan]="columns.length + 2">
+                    <div class="ui-g ui-fluid" style="padding:5px">
+                        <p-table [style]="{width:'100%'}" [value]="dataItensFilhos[rowData.numeroIncidente]" rowHover="true" [autoLayout]="true"
+                            dataKey="id" [responsive]="true">
+                            <ng-template pTemplate="caption">
+                                <i class="fa fa-lg fa-list" aria-hidden="true"></i> INCIDENTES RELACIONADOS
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Número do Incidente</th>
+                                    <th>Nome do Sistema</th>
+                                    <th>Status</th>
+                                    <th>Grupo</th>
+                                    <th>Data de Abertura</th>
+                                    <th>Data da Última Modificação</th>
+                                    <th>Data da Violação SLA</th>
+                                    <th>SLA</th>
+                                    <th>Situação Incidente</th>
+                                    <th>Time Line</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-evento>
+                                <tr [pSelectableRow]="rowData" style.backgroundColor="{{evento.criticidadeColor}}">
+                                    <td (click)="editar(rowData)">{{evento?.numeroIncidente}}</td>
+                                    <td (click)="editar(rowData)">{{evento?.tbIncidentePropriedade?.nomeSistema}}</td>
+                                    <td (click)="editar(rowData)">{{evento?.status}}</td>
+                                    <td (click)="editar(rowData)">{{evento?.grupo}}</td>
+                                    <td (click)="editar(rowData)">{{evento.dataAbertura | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    <td (click)="editar(rowData)">{{evento.dataUltimaModificacao | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    <td (click)="editar(rowData)">{{evento.dataViolacaoSLA | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    <td (click)="editar(rowData)" style="text-align: center">
+                                        <i [innerHTML]="evento?.iconStatusEvento"></i>
+                                    </td>
+                                    <td style="text-align: center; width: 80px">
+                                        <i [ngClass]="rowData.tbStatusFluxo.nome == 'REPROVADO' ? 'fa fa-times-circle validaGiReprovado text-red' : 'fa fa-pencil-square-o validaGi'"
+                                            *ngIf="permissaoBtnSolicitaValidacaoEPS && rowData.tbStatusFluxo.nome == 'NOVO_INCIDENTE' || permissaoBtnSolicitaValidacaoEPS && rowData.tbStatusFluxo.nome == 'REPROVADO'"
+                                            (click)="validaGi(rowData)" pTooltip="{{rowData.tbStatusFluxo.nome == 'NOVO_INCIDENTE' ? 'Solicitar Validação EPS' : 'Incidente Reprovado pela EPS'}}"
+                                            tooltipPosition="left" aria-hidden="true"></i>
+                                        <i class="fa fa-exclamation-circle validaEps" *ngIf="permissaoBtnValidaIncidente && rowData.tbStatusFluxo.nome == 'ACIONAMENTO_EPS_EFETIVADO'"
+                                            (click)="validaEps(rowData)" pTooltip="Validar Incidente" tooltipPosition="left"
+                                            aria-hidden="true"></i>
+                                        <i [ngClass]="rowData.tbStatusFluxo.nome == 'APROVADO' ? 'fa fa-check-circle incidenteAprvado text-green' : 'fa fa-share emAnalise'"
+                                            *ngIf="rowData.tbStatusFluxo.nome == 'APROVADO' || !permissaoBtnSolicitaValidacaoEPS && rowData.tbStatusFluxo.nome != 'ACIONAMENTO_EPS_EFETIVADO'"
+                                            pTooltip="{{rowData.tbStatusFluxo.nome == 'APROVADO' ? 'Incidente Aprovado pela EPS' : 'Aguardando Análise'}}"
+                                            tooltipPosition="left" aria-hidden="true"></i>
+
+                                        <!-- <i class="fa fa-pencil-square-o validaGi" (click)="validaGi(rowData)" pTooltip="Solicitar Validação EPS" tooltipPosition="left"
+                                            aria-hidden="true"></i>
+                                        <i class="fa fa-exclamation-circle validaEps" (click)="validaEps(rowData)" pTooltip="Validar Incidente" tooltipPosition="left"
+                                            aria-hidden="true"></i> -->
+                                    </td>
+                                    <td style="text-align: center; width: 50px">
+                                        <i (click)="visualizaTimeLine(rowData)" class="fa fa-lg fa-code-fork" aria-hidden="true" pTooltip="Visualizar TimeLine" tooltipPosition="left"></i>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                .
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</mk-box>
+
+
+<app-mti-incidente-detalhe *ngIf="displayDialog" [blockedPanel]="blockedPanel" [idIncidente]="idIncidente" [flIncidentePai]="flIncidentePai"
+    [numeroIncidente]="numeroIncidente" [persistentId]="persistentId" [tituloModal]="tituloModal" [detalheEventos]="detalheEventos"
+    [propriedade]="propriedade" [displayDialog]="displayDialog" (geraNotificacao)="startInterval()"></app-mti-incidente-detalhe>
+
+<mti-valida-incidente *ngIf="displayDialogValidaIncidente" [tituloModal]="tituloModal" [displayDialog]="displayDialogValidaIncidente"
+    [parametroBackend]="parametroBackend" [numeroIncidente]="numeroIncidente" (salvarTimelineNotificacao)="refreshTabelaIncidentesFilhos($event)"></mti-valida-incidente>
+
+<mti-valida-incidente-eps *ngIf="displayDialogValidaIncidenteEps" [tituloModal]="tituloModal" [displayDialog]="displayDialogValidaIncidenteEps"
+    [parametroBackend]="parametroBackend" [numeroIncidente]="numeroIncidente" (salvarTimelineEpsNotificacao)="refreshTabelaIncidentesFilhos($event)"></mti-valida-incidente-eps>
+
+<mti-timeline *ngIf="displayDialogTimeLine" [tituloModal]="tituloModal" [displayDialog]="displayDialogTimeLine"
+    [idIncidente]="idIncidente" [numeroIncidente]="numeroIncidente" (fecharTimeLineNotificacao)="startInterval()"></mti-timeline>

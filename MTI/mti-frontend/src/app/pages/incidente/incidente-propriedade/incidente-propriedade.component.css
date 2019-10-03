@@ -1,0 +1,27 @@
+#containerPropriedades{
+    width: 100%;
+    padding: 0
+}
+
+p-panel /deep/.ui-widget-header{
+    background: linear-gradient(to bottom, #063964 0%, #005193 100%) !important;
+    color: white;
+    font-size: 1.4rem;
+} 
+
+#containerPropriedades /deep/.ui-grid-row{
+    font-size:  1.2rem
+}
+
+#containerPropriedades /deep/.ui-grid-row /deep/label{
+    margin-bottom: 0 !important
+}
+
+p-panel{
+    width: 100%
+}
+
+textarea{
+    height: 100px;
+    resize: none
+}

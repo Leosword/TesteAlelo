@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.com.netservicos.mti</groupId>
+	<artifactId>mti-backend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>mti</name>
+	<description></description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.9.RELEASE</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<quartz.version>2.3.0</quartz.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- APIS SPRING BOOT -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<!-- APIS DE SEGURANÇA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.6.0</version>
+		</dependency>
+
+		<!-- APIS UTEIS -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+
+		<!-- JACKSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate5</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+
+
+
+		<!-- BANCO DE DADOS -->
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc6</artifactId> 
+			<version>11.2.0.3</version> </dependency> -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- SWAGGER -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- APIS UTEIS NETSERVICOS COTI -->
+		<!-- <dependency> <groupId>br.com.netservicos</groupId> <artifactId>ldap-service</artifactId> 
+			<version>1.0.14-RELEASE</version> </dependency> <dependency> <groupId>br.com.netservicos</groupId> 
+			<artifactId>ca-service</artifactId> <version>1.0.6-RELEASE</version> </dependency> 
+			<dependency> <groupId>br.com.netservicos</groupId> <artifactId>java-util</artifactId> 
+			<version>1.0.2-RELEASE</version> </dependency> <dependency> <groupId>br.com.netservicos</groupId> 
+			<artifactId>mail-service</artifactId> <version>1.0.11.RELEASE</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+		</dependency>
+
+		<!--LIBS DEPENDENTES PARA O QUARTZ -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>${quartz.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>${project.name}</warName>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>br.com.netservicos.mti.Application</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>local</spring.profiles.active>
+
+				<!-- BD LOCAL MYSQL -->
+				<spring.datasource.url>jdbc:h2:mem:testdb</spring.datasource.url>
+				<spring.datasource.username>sa</spring.datasource.username>
+				<spring.datasource.password>password</spring.datasource.password>
+				<spring.datasource.driver-class-name>org.h2.Driver</spring.datasource.driver-class-name>
+				<spring.jpa.database-platform>org.hibernate.dialect.H2Dialect</spring.jpa.database-platform>
+				<!-- <logging.level.org.hibernate.SQL>debug</logging.level.org.hibernate.SQL> 
+					<logging.level.org.hibernate.type.descriptor.sql>trace</logging.level.org.hibernate.type.descriptor.sql> -->
+
+				<!-- QUARTZ LOCAL -->
+				<quartz.autostartup>false</quartz.autostartup>
+
+			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>hml</id>
+
+			<properties>
+				<spring.profiles.active>hml</spring.profiles.active>
+
+				<!-- BD HOMOLOG -->
+				<spring.datasource.url>jdbc:mysql://10.29.220.11:3381/coti_mti_hml</spring.datasource.url>
+				<spring.datasource.username>root</spring.datasource.username>
+				<spring.datasource.password>#nettools@</spring.datasource.password>
+				<spring.datasource.driver-class-name>com.mysql.jdbc.Driver</spring.datasource.driver-class-name>
+				<spring.jpa.database-platform>org.hibernate.dialect.MySQL5Dialect</spring.jpa.database-platform>
+				<logging.level.org.hibernate.SQL>ERROR</logging.level.org.hibernate.SQL>
+				<logging.level.org.hibernate.type.descriptor.sql></logging.level.org.hibernate.type.descriptor.sql>
+				<spring.jpa.show-sql>false</spring.jpa.show-sql>
+
+				<!-- QUARTZ HOMOLOG -->
+				<quartz.autostartup>true</quartz.autostartup>
+
+			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+
+			</build>
+		</profile>
+		<profile>
+			<id>prod</id>
+
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+
+				<!-- BD PRODUÇÃO -->
+				<spring.datasource.url>jdbc:mysql://10.29.220.11:3381/coti_mti</spring.datasource.url>
+				<spring.datasource.username>root</spring.datasource.username>
+				<spring.datasource.password>#nettools@</spring.datasource.password>
+				<spring.datasource.driver-class-name>com.mysql.jdbc.Driver</spring.datasource.driver-class-name>
+				<spring.jpa.database-platform>org.hibernate.dialect.MySQL5Dialect</spring.jpa.database-platform>
+				<logging.level.org.hibernate.SQL>ERROR</logging.level.org.hibernate.SQL>
+				<logging.level.org.hibernate.type.descriptor.sql></logging.level.org.hibernate.type.descriptor.sql>
+				<spring.jpa.show-sql>false</spring.jpa.show-sql>
+
+				<!-- QUARTZ PRODUÇÃO -->
+				<quartz.autostartup>false</quartz.autostartup>
+
+			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+
+			</build>
+		</profile>
+	</profiles>
+
+	<!-- <repositories> <repository> <id>maven-group</id> <url>http://10.29.220.10:9081/repository/maven-group/</url> 
+		</repository> </repositories> <distributionManagement> <snapshotRepository> 
+		<id>nexus-snapshots</id> <url>http://10.29.220.10:9081/repository/maven-snapshots/</url> 
+		</snapshotRepository> <repository> <id>nexus-releases</id> <url>http://10.29.220.10:9081/repository/maven-releases/</url> 
+		</repository> </distributionManagement> -->
+</project>

@@ -1,0 +1,59 @@
+<p-dialog header="{{tituloModal}}" [positionTop]="60" [(visible)]="displayDialog" [responsive]="true" appendTo="body" [modal]=true showEffect="fade"
+[width]="700">
+
+<form [formGroup]="userform" novalidate (ngSubmit)="salvar()">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+        <div class="ui-grid-row">
+            <div id="novoComponentContainer" class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-md-12">
+                    <label class="control-label">Nome</label>
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">
+                            <i class="fa fa-address-card-o"></i>
+                        </span>
+                        <input formControlName="nome" [(ngModel)]="dominioLdap && dominioLdap.nome" type="text" pInputText placeholder="Digite o nome do Domínio Ldap">
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['nome'].valid&&userform.controls['nome'].dirty">
+                            <i class="fa fa-close"></i>
+                            O nome do Domínio Ldap é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-12">
+                    <label class="control-label">Descrição</label>
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">
+                            <i class="fa fa-address-card-o"></i>
+                        </span>
+                        <input formControlName="descricao" [(ngModel)]="dominioLdap && dominioLdap.descricao" type="text" pInputText placeholder="Digite a descrição do Dominío">
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-12">
+                    <label class="control-label">Status</label>
+                    <p-card>
+                        <div class="ui-inputgroup">
+                            <div class="ui-g-6">
+                                <p-radioButton [style]="{lineHeight: '0.5'}" name="rdbStatus" value="1" label="Ativo" [(ngModel)]="dominioLdap.status" formControlName="rdbStatus"></p-radioButton>
+                            </div>
+                            <div class="ui-g-6">
+                                <p-radioButton [style]="{lineHeight: '0.5'}" name="rdbStatus" value="2" label="Inativo" [(ngModel)]="dominioLdap.status" formControlName="rdbStatus"></p-radioButton>
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                <button pButton type="button" (click)="closeModal()" label="Cancelar" class="ui-button-secondary"></button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:right; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="!userform.valid || !dadosComunsRef.userform.valid"></button>
+            </div>
+        </div>
+    </p-footer>
+</form>
+</p-dialog>

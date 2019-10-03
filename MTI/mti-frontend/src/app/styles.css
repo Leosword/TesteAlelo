@@ -1,0 +1,176 @@
+/* You can add global styles to this file, and also import other style files */
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border-color: #eae3e3;
+}
+
+.swal-title {
+  margin: 0px;
+  font-size: 18px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.21);
+  margin-bottom: 28px !important;
+  margin-top: 0px !important;
+}
+
+.swal2-toaster .swal2-content {
+  color: #fff !important;
+  font-family: Roboto;
+  font-weight: 400 !important
+  
+} 
+
+.swal2-popup.swal2-toast {
+  font-size: 1.5rem
+}
+.swal2-popup {
+  font-size: 1.5rem !important
+}
+
+.skin-blue-light .sidebar-menu > li > a{
+  font-weight: 400 !important;
+  font-family: roboto !important
+}
+
+/* .krajee-default.file-preview-frame .kv-file-content{
+  height: 106px !important
+}
+
+.file-drop-zone{
+  height: 230px !important
+} */
+.content {
+  padding: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.content-inner{
+  padding-bottom: 30px;
+}
+
+.content-header {
+  padding: 10px 10px 0 10px;
+}
+.content-header > h1{
+  font-size: 18px
+}
+.main-header{
+  z-index: 1001;
+}
+body{
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.skin-blue-light .sidebar-menu > li > a{
+  font-weight: 400 !important;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important
+}
+#headerIncidentes{
+  padding: 5px 5px 5px 10px;
+  border-bottom: 1px solid #CCCCCC !important;
+  z-index: 1
+}
+.box-body {
+  padding: 2px;
+}
+.box.box-default{
+  border-top-color: #3c8dbc;
+}
+
+p-table /deep/th{
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+p-table /deep/tr{
+  font-size: 1.2rem;
+}
+p-table /deep/.ui-widget{
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  
+}
+
+p-table /deep/p-table{
+  width: 100%
+}
+
+p-table /deep/p-table div{
+  background: linear-gradient(to bottom, #72AFD2 0%, #72AFD2 100%);
+  color: white;
+  text-align: left
+}
+
+p-table /deep/p-table tfoot{
+  font-size: 2px
+}
+
+p-table /deep/.ui-chkbox{
+  margin-left: 1.5px;
+}
+
+p-table /deep/.ui-chkbox .ui-chkbox-box{
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+p-table /deep/.ui-table-caption{
+  background: white;
+  border: none;
+}
+
+p-table /deep/.ui-table .ui-paginator-bottom{
+  background: white;
+  border: none;
+}
+.ui-dialog-titlebar{
+  background: linear-gradient(to bottom, #063964 0%, #005193 100%) !important;
+  color: white
+} 
+.main-footer{
+  padding: 8px;
+  border-top-color: #3c8dbc !important;
+}
+
+.sidebar-menu /deep/li{
+  font-size: 1.3rem;
+}
+
+.treeview-menu > li > a{
+  font-size: 1.3rem;
+}
+
+.ui-togglebutton.ui-button.ui-state-active, .ui-selectbutton .ui-button.ui-state-active{
+  border: 1px solid #3c8dbc;
+  background: #D3D5D8;
+  color: #000000;
+  font-weight: bold
+}
+
+.ui-widget{
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.ui-growl {
+  position: fixed;
+  top: 55px;
+  right: 10px;
+  width: 20em;
+}
+
+.ui-password-panel{
+  width: 347px
+}
+
+.ui-password-meter{
+  width: 547px !important
+}
+.ui-password-info{
+  width: 547px !important
+}
+
+.ui-state-disabled, .ui-widget:disabled{
+  opacity: 0.75;
+}

@@ -1,0 +1,163 @@
+<p-dialog header="{{tituloModal}}" [contentStyle]="{'padding': '0', 'overflow-x':'hidden'}" (onHide)="closeModal()" [(visible)]="displayDialog"
+    [responsive]="true" appendTo="body" [modal]=true showEffect="fade" [width]="700">
+
+    <form [formGroup]="userform" novalidate (ngSubmit)="salvar()">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            <div class="ui-grid-row">
+                <div id="novoServidorContainer" class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Nome</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input formControlName="nome" [readonly]="modoVisualizacao" [(ngModel)]="usuario && usuario.nome" type="text" pInputText placeholder="Digite o nome do Usuário">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['nome'].valid&&userform.controls['nome'].dirty">
+                                <i class="fa fa-close"></i>
+                                O nome do usuário é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Login</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-address-book"></i>
+                            </span>
+                            <input formControlName="login" [readonly]="modoVisualizacao" [(ngModel)]="usuario && usuario.loginDeRede" type="text" pInputText placeholder="Digite o login do Usuário">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['login'].valid&&userform.controls['login'].dirty">
+                                <i class="fa fa-close"></i>
+                                O login do usuário é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Email</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <input formControlName="email" [readonly]="modoVisualizacao" [(ngModel)]="usuario && usuario.email" type="text" pInputText placeholder="Digite o email do Usuário">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['email'].valid&&userform.controls['email'].dirty">
+                                <i class="fa fa-close"></i>
+                                Digite um email válido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Operação</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                            <p-dropdown formControlName="operacao" [disabled]="modoVisualizacao" placeholder="Selecione uma Operação" optionLabel="nome" [options]="operacoes" [(ngModel)]="usuario && usuario.tbOperacao"
+                                [style]="{'width':'100%'}"></p-dropdown>
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['operacao'].valid&&userform.controls['operacao'].dirty">
+                                <i class="fa fa-close"></i>
+                                É necessário selecionar uma Operação.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <p-panel header="Atribuir Perfis" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+                            <p-pickList [source]="listaPerfis" [disabled]="modoVisualizacao" [target]="usuario && usuario.tbPerfils" [showSourceControls]="false" [showTargetControls]="false"
+                                sourceHeader="Perfis Disponiveis" targetHeader="Perfis Atribuidos" [responsive]="true" filterBy="nome"
+                                dragdrop="true" dragdropScope="cars" sourceFilterPlaceholder="Filtro" targetFilterPlaceholder="Filtro"
+                                [sourceStyle]="{'min-height':'200px'}" [targetStyle]="{'min-height':'200px'}">
+                                <ng-template let-botao pTemplate="item">
+                                    <div class="ui-helper-clearfix">
+                                        {{botao.nome}}
+                                    </div>
+                                </ng-template>
+                            </p-pickList>
+                        </p-panel>
+                    </div>
+                    <!-- <div class="ui-g-12 ui-md-12">
+                            <label class="control-label">Perfil</label>
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon">
+                                    <i class="fa fa-crosshairs"></i>
+                                </span>
+                                <p-multiSelect defaultLabel="Selecione um Perfil" [style]="{'height':'30px'}" optionLabel="nome" [options]="perfis"
+                                    [(ngModel)]="usuario && usuario.tbPerfils" formControlName="perfil"></p-multiSelect>
+                            </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['perfil'].valid&&userform.controls['perfil'].dirty">
+                                <i class="fa fa-close"></i>
+                                É necessário selecionar um Perfil.
+                            </div>
+                        </div>
+                    </div> -->
+                    <div formGroupName="formSenha" class="ui-g-12 ui-md-12">
+                        <div class="ui-g-12 ui-md-12 formGroupNameProfile">
+                            <label class="control-label">Tipo de Autenticação</label>
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon">
+                                    <i class="fa fa-link"></i>
+                                </span>
+                                <p-dropdown formControlName="profile" [disabled]="modoVisualizacao" placeholder="Selecione um Profile" [options]="listaProfiles" [(ngModel)]="usuario && usuario.profile"
+                                    (onChange)="tipoAutenticacaoChanged($event)" [style]="{'width':'100%'}"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-12 formGroupName" *ngIf="campoSenha && acao == 'novo'" >
+                            <label class="control-label">Senha</label>
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                <input formControlName="senha" [readonly]="modoVisualizacao" name="senha" [(ngModel)]="usuario && usuario.senha" type="password" pInputText placeholder="Digite a senha do Usuário">
+                            </div>
+                            <div class="ui-g-12 ui-md-12">
+                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="userform.get('formSenha').touched && userform.get('formSenha').hasError('modeloReq')">
+                                    <i class="fa fa-close"></i>
+                                    O preenchimento da senha é obrigatório.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Descrição</label>
+                        <div class="ui-inputgroup">
+                            <span style="line-height: 37px" class="ui-inputgroup-addon">
+                                <i class="fa fa-text-width"></i>
+                            </span>
+                            <textarea formControlName="descricao" [readonly]="modoVisualizacao" [(ngModel)]="usuario && usuario.descricao" type="text" pInputText placeholder="Digite uma breve descrição"></textarea>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <label class="control-label">Status</label>
+                        <p-card>
+                            <div class="ui-inputgroup">
+                                <div class="ui-g-6">
+                                    <p-radioButton [disabled]="modoVisualizacao" [style]="{lineHeight: '0.5'}" name="rdbStatus" value="1" label="Ativo" [(ngModel)]="usuario.status" formControlName="rdbStatus"></p-radioButton>
+                                </div>
+                                <div class="ui-g-6">
+                                    <p-radioButton [disabled]="modoVisualizacao" [style]="{lineHeight: '0.5'}" name="rdbStatus" value="2" label="Inativo" [(ngModel)]="usuario.status" formControlName="rdbStatus"></p-radioButton>
+                                </div>
+                            </div>
+                        </p-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="row footer">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button *ngIf="!modoVisualizacao" pButton type="button" (click)="closeModal()" label="Cancelar" class="ui-button-secondary botaoFooter"></button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:right; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button *ngIf="!modoVisualizacao" pButton type="submit" label="Salvar" class="ui-button-success botaoFooter" [disabled]="!userform.valid && acao == 'novo'"></button>
+                    <button *ngIf="modoVisualizacao" pButton type="button" (click)="closeModal()" label="Fechar" class="ui-button-secondary botaoFooter"></button>
+                </div>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>

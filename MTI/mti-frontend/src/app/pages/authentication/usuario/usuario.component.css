@@ -1,0 +1,107 @@
+p-table /deep/.ui-widget{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    
+}
+
+p-table /deep/th{
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+p-table /deep/p-table{
+    width: 100%
+}
+
+p-table /deep/p-table div{
+    background: linear-gradient(to bottom, #72AFD2 0%, #72AFD2 100%);
+    color: white;
+    text-align: left
+}
+
+p-table /deep/p-table tfoot{
+    font-size: 2px
+}
+
+mk-box-info /deep/.info-box {
+    color: white
+}
+
+mk-box /deep/.box-body {
+    padding: 2px;
+}
+.ui-inputgroup{
+    float: right
+}
+
+.filtroGlobal{
+    padding-right: 8px;
+}
+
+.switchButton{
+    text-align: left;
+    padding-left: 8px;
+}
+#tituloTabela{
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0;
+}
+.botoesAcao{
+    text-align: left;
+    font-weight: normal;
+}
+.botoesAcao /deep/button{
+    height: 25px;
+    margin-top: 2px;
+}
+.tableCentralizada{
+    text-align: center
+}
+.tableEsquerda{
+    text-align: left
+}
+#headerTbUsuarios{
+    padding: 5px 5px 5px 10px;
+    border-bottom: 1px solid #CCCCCC !important;
+    z-index: 1
+}
+.edicao{
+    color: #3C8DBC  !important;
+    font-size: 1.5rem;
+    padding: 0 3px 0 3px;
+    cursor: pointer
+}
+
+.alterarSenha{
+    color: #000  !important;
+    font-size: 1.5rem;
+    padding: 0 3px 0 3px;
+    cursor: pointer
+}
+
+.ativar{
+    color: #4CAE4C  !important;
+    font-size: 1.5rem;
+    padding: 0 3px 0 3px;
+    cursor: pointer
+}
+
+.desativar{
+    color: #DD4B39  !important;
+    font-size: 1.5rem;
+    padding: 0 3px 0 3px;
+    cursor: pointer
+}
+.visualizar{
+    color: #374850  !important;
+    font-size: 1.5rem;
+    padding: 0 3px 0 3px;
+    cursor: pointer
+}
+
+.tableCentralizada{
+    text-align: center
+}
+.tableEsquerda{
+    text-align: left
+}

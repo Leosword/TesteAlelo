@@ -1,0 +1,67 @@
+<mk-box [isCollapsable]="false" [isRemovable]="false">
+    <header id="headerTbUsuarios">
+        <div class="ui-grid-row">
+            <div id="tituloTabela" class="ui-g-6 ui-md-6">
+                <i class="fa fa-users"></i>
+                Lista de Usuários
+            </div>
+            <div id="dataAtualizacao" class="ui-g-6 ui-md-6">
+
+            </div>
+        </div>
+    </header>
+    <p-table #dt [columns]="colunas" [value]="usuarios" [rowsPerPageOptions]="[5,20,30]" [autoLayout]="true" dataKey="id" [paginator]="true"
+        [rows]="30" [responsive]="true" [(selection)]="usuariosSelecionados" [globalFilterFields]="['id','qtdeEventosFilhos', 'dataAbertura', 'incidentes', 'duracao', 'nomesAplicacoes', 'nomesLocalidades', 'nomeResponsavelTratamento']">
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col-lg-6 botoesAcao">
+                    <button *ngIf="permissaoBtnNovo" class="ui-button-success" type="button" pButton icon="fa-plus" (click)="adicionar()" label="Novo Usuário"></button>
+                </div>
+
+                <div class="col-lg-6 filtroGlobal">
+                    <div class="ui-inputgroup" style="float: right">
+                        <span class="ui-inputgroup-addon" style="width: 30px;">
+                            <i class="fa fa-search"></i>
+                        </span>
+                        <input type="text" size="50" pInputText placeholder="Filtro" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 2.25em">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center" [ngClass]="col.field === 'iconStatus' || col.field === 'dataCadastro' || col.field === 'id' ? 'colunasFixas' : 'colunasDinamicas'">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th style="text-align: center; width: 100px">Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-evento let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
+                <td *ngFor="let col of columns" [ngClass]="col.field === 'iconStatus' ? 'tableCentralizada' : 'tableEsquerda'">
+                    <span [innerHTML]="col.field === 'dataCadastro' ? (rowData[col.field] | date:'dd/MM/yyyy HH:mm:ss') : getValor(rowData[col.field], col.field)"></span>
+                </td>
+                <td style="text-align: center; width: 150px">
+                    <i class="fa fa-eye visualizar" *ngIf="permissaoBtnVisualizar" (click)="editar(rowData, true)" pTooltip="Visualizar Usuário" tooltipPosition="left" aria-hidden="true"></i>
+                    <i class="fa fa-pencil edicao" *ngIf="permissaoBtnEditar && rowData.id != 1" (click)="editar(rowData, false)" pTooltip="Editar Usuário" tooltipPosition="left" aria-hidden="true"></i>
+                    <i class="fa fa-lock alterarSenha" *ngIf="permissaoBtnAlteraSenha  && rowData.id != 1" (click)="alterarSenha(rowData)" pTooltip="Alterar Senha" tooltipPosition="left" aria-hidden="true"></i>
+                    <i class="fa fa-times desativar" *ngIf="permissaoBtnDesativar  && rowData.id != 1" (click)="desativaUsuario(rowData)" pTooltip="Desativar Usuário" aria-hidden="true"></i>
+                    <i class="fa fa-plus ativar" *ngIf="permissaoBtnAtivar  && rowData.id != 1" (click)="ativaUsuario(rowData)" pTooltip="Ativar Usuário" aria-hidden="true"></i>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</mk-box>
+
+<diario-novo-usuario *ngIf="displayDialog" [modoVisualizacao]="modoVisualizacao" [tituloModal]="tituloModal" [listaPerfisAssociados]="listaPerfisAssociados" [usuario]="usuarioSelecionado" [acao]="acao" [displayDialog]="displayDialog"
+    (salvarUsuarioNotificacao)="obterTodos()"></diario-novo-usuario>
+
+<mti-alterar-senha *ngIf="displayDialogSenha" [tituloModal]="tituloModal" [usuario]="usuarioSelecionado" [displayDialog]="displayDialogSenha"
+    (salvarSenhaNotificacao)="obterTodos()"></mti-alterar-senha>

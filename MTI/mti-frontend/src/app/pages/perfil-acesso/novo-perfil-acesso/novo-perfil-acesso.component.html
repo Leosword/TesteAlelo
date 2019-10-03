@@ -1,0 +1,97 @@
+<p-dialog header="{{tituloModal}}" [(visible)]="displayDialog" (onHide)="closeModal()" [responsive]="true" appendTo="body"
+    [modal]=true showEffect="fade" [width]="1000">
+    <form [formGroup]="userform" (ngSubmit)="salvar()">
+        <div id="containerModal" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            <div class="ui-grid-row">
+                <div id="novoPerfilContainer" class="ui-g ui-fluid">
+                    <div class="ui-g-8 ui-md-8 row1">
+                        <label class="control-label">Nome</label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-address-card-o"></i>
+                            </span>
+                            <input formControlName="nome" [readonly]="modoVisualizacao" [(ngModel)]="perfil && perfil.nome" type="text" pInputText placeholder="Digite o nome do perfil">
+                        </div>
+                        <div class="ui-g-12 ui-md-12">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['nome'].valid&&userform.controls['nome'].dirty">
+                                <i class="fa fa-close"></i>
+                                O nome do perfil é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-4 ui-md-4 row1">
+                            <label class="control-label">Status</label>
+                            <p-selectButton formControlName="rdbStatus" [options]="types" [(ngModel)]="perfil && perfil.flAtivo"></p-selectButton>
+                        </div>
+                    <div class="ui-g-12 ui-md-12 row2">
+                        <label class="control-label">Descrição</label>
+                        <div class="ui-inputgroup">
+                            <span style="line-height: 37px" class="ui-inputgroup-addon">
+                                <i class="fa fa-info"></i>
+                            </span>
+                            <textarea formControlName="descricao" [readonly]="modoVisualizacao" [(ngModel)]="perfil && perfil.descricao" type="text"
+                                pInputText placeholder="Digite uma breve descrição"></textarea>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12">
+                        <p-panel header="Permissão de Acesso" [toggleable]="true">
+                            <div class="row containerPermissoes">
+                                <div class="ui-g-4 ui-md-4">
+                                    <p-listbox formControlName="teste" [options]="tbMenu" [(ngModel)]="menuSelecionado">
+                                            
+                                        <ng-template let-tbMenu pTemplate="item">
+                                            <div class="ui-helper-clearfix" (click)="obterMenuComFuncionalidadesAssociadas(tbMenu.value)">
+                                                <i *ngIf="menuSelecionado == tbMenu.value" class="fa fa-dot-circle-o" aria-hidden="true"></i>
+                                                <i *ngIf="menuSelecionado != tbMenu.value" class="fa fa-circle-o" aria-hidden="true"></i>
+                                                <span>{{tbMenu.label}}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-listbox>
+                                </div>
+                                <div class="ui-g-8 ui-md-8">
+                                    <p-table #dt id="teste" (onRowUnselect)="desmarcaCheckBox($event)" [metaKeySelection]="true" [columns]="colunas" [value]="funcionalidades" [autoLayout]="true" dataKey="id" [responsive]="true"
+                                        [(selection)]="listaFuncionalidadesAssociadas" [globalFilterFields]="['id','qtdeEventosFilhos', 'dataAbertura', 'incidentes', 'duracao', 'nomesAplicacoes', 'nomesLocalidades', 'nomeResponsavelTratamento']">
+                                        
+                                        <ng-template pTemplate="header" let-columns>
+                                            <tr>
+                                                <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center" >
+                                                    {{col.header}}
+                                                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                                                </th>
+                                                <th style="width: 2.25em">
+                                                    Grant
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-rowData let-evento let-columns="columns">
+                                            <tr [pSelectableRow]="rowData">
+                                                <!-- {{rowData | json}} -->
+                                                <td *ngFor="let col of columns">
+                                                    <span [innerHTML]="col.field === 'dataCriacao' ? (rowData[col.field] | date:'dd/MM/yyyy HH:mm:ss') : getValor(rowData[col.field], col.field)"></span>
+                                                </td>
+                                                <td>
+                                                    <p-tableCheckbox [ngClass]="rowData.tbTipoFuncionalidade.nome === 'Menu' ? 'itemPai' : 'itemFilho'" (click)="marcaCheckBox(rowData)" [value]="rowData"></p-tableCheckbox>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </p-panel>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button *ngIf="!modoVisualizacao" pButton type="button" (click)="closeModal()" label="Cancelar" class="ui-button-secondary"></button>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:right; font-weight: 400; border-top: 1px solid #CCCCCC; padding-top: 10px">
+                    <button *ngIf="!modoVisualizacao" pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="!userform.valid"></button>
+                    <button *ngIf="modoVisualizacao" pButton type="button" (click)="closeModal()" label="Fechar" class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>

@@ -1,0 +1,28 @@
+{
+  "name": "angular-admin-lte",
+  "version": "0.3.7",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mika-el/angular-admin-lte"
+  },
+  "author": {
+    "name": "Mik@",
+    "email": "michael.ledour@gmail.com"
+  },
+  "keywords": [
+    "angular",
+    "angular 4",
+    "angular 5",
+    "typescript",
+    "admin-lte"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mika-el/angular-admin-lte/issues"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=4.0.0",
+    "admin-lte": "^2.4.2",
+    "bootstrap": "^3.3.7"
+  }
+}

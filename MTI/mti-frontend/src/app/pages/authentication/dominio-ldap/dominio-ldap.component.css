@@ -1,0 +1,31 @@
+p-table /deep/.ui-widget{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    
+}
+
+p-table /deep/th{
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+mk-box /deep/.box-body {
+    padding: 0px 10px 10px 10px;
+}
+
+#tituloTabela{
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 15px 0px 0px 2px;
+}
+
+#dataAtualizacao{
+    text-align: right;
+    font-size: 1.2rem;
+    padding: 19px 3px 0px 0px;
+}
+#colunaVazia{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: red;
+}

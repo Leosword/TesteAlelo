@@ -1,0 +1,36 @@
+.ui-g-12 .ui-md-12{
+    padding: 0
+}
+
+.ui-message{
+    margin: 0.3em 0 0 0;
+}
+
+.ui-grid .ui-grid-row{
+    margin-bottom: 3rem
+}
+
+label{
+    font-weight: 400
+}
+#novoFormContainer{
+    width: 100%
+}
+
+
+.ui-grid-row{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    
+}
+
+p-footer /deep/.ui-widget{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.footer{
+    padding: 0 15px 15px 15px;
+}
+
+.botaoFooter{
+    width: 50%;
+}

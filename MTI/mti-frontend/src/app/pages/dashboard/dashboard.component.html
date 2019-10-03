@@ -1,0 +1,110 @@
+<mk-box header="Eventos Tratados x Abertos" [isCollapsable]="false" [isRemovable]="false">
+  <div class="ui-grid-row">
+    <div class="ui-g-2 ui-md-2">
+        <p-panel header="Tratado por Analista">
+            <i class="fa fa-lg fa-user" aria-hidden="true"></i>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+            <span>398</span>
+        </p-panel>
+    </div>
+    <div class="ui-g-2 ui-md-2">
+        <p-panel header="Eventos Abertos">
+            <i class="fa fa-wpforms" aria-hidden="true"></i>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+            <span>398</span>
+        </p-panel>
+    </div>
+    <div class="ui-g-2 ui-md-2">
+        <p-panel header="Eventos Encerrados">
+            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+            <span>398</span>
+        </p-panel>
+    </div>
+    <div class="ui-g-2 ui-md-2">
+        <p-panel header="Backlog Total">
+            <i class="fa fa-cube" aria-hidden="true"></i>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+            <span>398</span>
+        </p-panel>
+    </div>
+    <div class="ui-g-2 ui-md-2">
+        <p-panel header="Backlog Eventos Pai">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+            <span>398</span>
+        </p-panel>
+    </div>
+    <div class="ui-g-2 ui-md-2">
+        <p-panel header="Backlog Eventos Filho">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+            <span>398</span>
+        </p-panel>
+    </div>
+    
+  </div>
+  <div class="ui-grid-row">
+    <div class="ui-g-6 ui-md-6">
+        <div class="ui-g-6 ui-md-6">
+            <p-panel>
+                <p-header>
+                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                    Tratados x Abertos - (Dia)
+                </p-header>
+                <p-chart type="pie" [data]="graficoPie"></p-chart>
+            </p-panel>
+        </div>
+        <div class="ui-g-6 ui-md-6">
+            <p-panel>
+                <p-header>
+                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                    Abertos x Qtd Analistas - (Dia)
+                </p-header>
+                <p-chart type="pie" [data]="graficoPie"></p-chart>
+            </p-panel>
+        </div>
+    </div>
+    <div class="ui-g-6 ui-md-6">
+        <div class="ui-g-6 ui-md-6">
+            <p-panel>
+                <p-header>
+                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                    Tratados x Abertos - (Mês)
+                </p-header>
+                <p-chart type="pie" [data]="graficoPie"></p-chart>
+            </p-panel>
+        </div>
+        <div class="ui-g-6 ui-md-6">
+            <p-panel>
+                <p-header>
+                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                    Abertos x Qtd Analistas - (Mês)
+                </p-header>
+                <p-chart type="pie" [data]="graficoPie"></p-chart>
+            </p-panel>
+        </div>
+    </div>
+  </div>
+  <div class="ui-grid-row">
+    <div class="ui-g-6 ui-md-6">
+        <p-panel>
+            <p-header>
+                <i class="fa fa-line-chart" aria-hidden="true"></i>
+                Tratados x Abertos x Tratados <= 10min
+            </p-header>
+            <p-chart #chartLinha type="line" [data]="graficoLinha" (onDataSelect)="selectData($event)"></p-chart>
+        </p-panel>
+    </div>
+    <div class="ui-g-6 ui-md-6">
+        <p-panel>
+            <p-header>
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                Tratados x Abertos x Tratados <= 10min
+            </p-header>
+            <p-chart type="bar" [data]="graficoColuna" (onDataSelect)="selectData($event)"></p-chart>
+        </p-panel>
+    </div>
+    
+  </div>
+</mk-box>

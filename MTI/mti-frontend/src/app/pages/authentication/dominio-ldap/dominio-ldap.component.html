@@ -1,0 +1,57 @@
+<mk-box [isCollapsable]="false" [isRemovable]="false">
+    <header>
+        <div class="ui-grid-row">
+            <div id="tituloTabela" class="ui-g-6 ui-md-6">
+                <i class="fa fa-chain"></i>
+                Lista de Domínios Ldap
+            </div>
+            <div id="dataAtualizacao" class="ui-g-6 ui-md-6">
+                <i class="fa fa-clock-o"></i>
+                Atualizado - 17/05/2018 11:24
+            </div>
+        </div>
+    </header>
+    <p-table [value]="dominiosLdap" [autoLayout]="true" [(selection)]="dominiosLdapSelecionados" dataKey="id" [paginator]="true"
+        [rows]="10" [responsive]="true">
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col-lg-6" style="text-align:left; font-weight: 400">
+                    <button class="ui-button-success" type="button" pButton icon="fa-plus" (click)="adicionar()" label="Incluir"></button>
+                    <button class="ui-button-danger" type="button" pButton icon="fa-trash" (click)="deletarTodosLogicamente()" label="Excluir"></button>
+                </div>
+                <div class="col-lg-6" style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Filtro" (input)="filtro.filterGlobal($event.target.value, 'contains')"
+                        style="width:auto; font-weight: normal">
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 2.25em">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-dominioLdap>
+            <tr [pSelectableRow]="rowData">
+                <td>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
+                <td>{{dominioLdap.id}}</td>
+                <td>{{dominioLdap.nome}}</td>
+                <td>
+                    <button pButton icon="fa-pencil" (click)="editar(rowData)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+</mk-box>
+
+<diario-novo-dominio-ldap *ngIf="displayDialog" [tituloModal]="tituloModal" [dominioLdap]="dominioLdapSelecionado" [displayDialog]="displayDialog"
+        (salvarDominioLdapNotificacao)="obterTodos()"></diario-novo-dominio-ldap>

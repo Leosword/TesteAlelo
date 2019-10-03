@@ -1,0 +1,6 @@
+export class StatusFluxo {
+    static NOVO_INCIDENTE = "NOVO_INCIDENTE"
+    static ACIONAMENTO_EPS_EFETIVADO = "ACIONAMENTO_EPS_EFETIVADO"
+    static REPROVADO = "REPROVADO"
+    static APROVADO = "APROVADO"
+}

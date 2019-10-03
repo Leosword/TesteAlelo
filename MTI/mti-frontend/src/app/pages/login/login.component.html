@@ -1,0 +1,38 @@
+
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                <form class="form" #form="ngForm" (ngSubmit)="login()" novalidate>
+                    <div class="header header-primary text-center">
+                        <div class="logo-container">
+                            <img src="app/assets/img/alelo-logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="input-group form-group-no-border input-lg" [ngClass]="getFormGroupClass(txtLoginDeRede.invalid,txtLoginDeRede.dirty)">
+                            <span class="input-group-addon">
+                                <i class="now-ui-icons users_circle-08"></i>
+                            </span>
+                            
+                            <input type="text" autofocus #inputName name="txtLoginDeRede" #txtLoginDeRede="ngModel" class="form-control" [(ngModel)]="user.loginDeRede" placeholder="Login de Rede...">
+                            <span class="help-block" *ngIf="txtLoginDeRede.invalid && txtLoginDeRede.dirty">O login de rede é obrigatório</span>
+                        </div>
+                        <div class="input-group form-group-no-border input-lg" [ngClass]="getFormGroupClass(txtPassword.invalid,txtPassword.dirty)">
+                            <span class="input-group-addon">
+                                <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                            </span>
+                            <input type="password" name="txtPassword" #txtPassword="ngModel" [(ngModel)]="user.senha" placeholder="Password..." class="form-control" />
+                            <span class="help-block" *ngIf="txtPassword.invalid && txtPassword.dirty">A senha é obrigatória</span>
+                        </div>
+                    </div>
+                    <div class="footer text-center">
+                        <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-round btn-lg btn-block">Login</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+.main-sidebar {
+  overflow: hidden;
+}
+
+.treeview-menu.collapse {
+  display: none;
+}
+
+.treeview-menu,
+.treeview-menu.collapse.in {
+  display: block;
+}
+
+.sidebar-form, .sidebar-menu > li.header{
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.sidebar{
+  height: 100% !important;
+}

@@ -1,0 +1,58 @@
+p-fileupload /deep/.ui-fileupload-choose {
+    background-color: #5cb85c !important;
+    border: 1px solid #5cb85c !important;
+    color: #ffffff;
+    width: 28% !important;
+}
+
+p-fileupload /deep/.ui-fileupload-buttonbar .ui-button {
+    background: #d9534f;
+    border: 1px solid #d9534f;
+    color: #ffffff;
+    width: 19%;
+}
+
+p-fileupload /deep/.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ng-star-inserted {
+    background: #d9534f;
+    border: 1px solid #d9534f;
+    color: #ffffff;
+}
+
+.ui-multiselect{
+    height: 30px;
+}
+.ui-g-12 .ui-md-12{
+    padding: 0
+}
+
+.ui-message{
+    margin: 0.3em 0 0 0;
+}
+
+.ui-grid .ui-grid-row{
+    margin-bottom: 3rem
+}
+
+label{
+    font-weight: 400
+}
+#validaIncidenteContainer{
+    width: 100%
+}
+
+#containerModal{
+    margin: -10px -15px 0px -15px;
+}
+
+textarea{
+    resize: none;
+    height: 100px;
+}
+
+button{
+    width: 30%;
+}
+
+.botaoSolicitarValidacaoEps{
+    width: auto;
+}

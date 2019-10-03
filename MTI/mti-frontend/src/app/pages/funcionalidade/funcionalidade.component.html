@@ -1,0 +1,58 @@
+<p-blockUI [blocked]="blockedPanel">
+  <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="position:absolute;top:50%;left:50%; color: white"></i>
+</p-blockUI>
+<mk-box [isCollapsable]="false" [isRemovable]="false">
+  <header id="headerIncidentes">
+    <div class="ui-grid-row">
+      <div id="tituloTabela" class="ui-g-6 ui-md-6">
+        <i class="fa fa-table"></i>
+        Gerenciamento de Funcionalidade
+      </div>
+      <div class="ui-g-6 ui-md-6">
+      </div>
+    </div>
+  </header>
+  <p-table #dt [columns]="colunas" [value]="funcionalidades" [rowsPerPageOptions]="[10,15,20,30]" [autoLayout]="true" dataKey="id" [paginator]="true"
+    [rows]="30" [responsive]="true" [(selection)]="funcionalidadesSelecionadas" [globalFilterFields]="['id','qtdeEventosFilhos', 'dataAbertura', 'incidentes', 'duracao', 'nomesAplicacoes', 'nomesLocalidades', 'nomeResponsavelTratamento']">
+    <ng-template pTemplate="caption">
+      <div class="row">
+        <div class="col-lg-6 botoesAcao">
+          <button *ngIf="permissaoBtnAtivar" class="ui-button-danger" type="button" pButton icon="fa-trash" (click)="desativarFuncionalidades()" label="Desativar Funcionalidades"></button>
+          <button *ngIf="permissaoBtnDesativar" class="ui-button-success" type="button" pButton icon="fa-check" (click)="ativarFuncionalidades()" label="Ativar Funcionalidades"></button>
+        </div>
+
+        <div class="col-lg-6 filtroGlobal">
+          <div class="ui-inputgroup" style="float: right">
+            <span class="ui-inputgroup-addon" style="width: 30px;">
+              <i class="fa fa-search"></i>
+            </span>
+            <input type="text" size="50" pInputText placeholder="Filtro" (input)="dt.filterGlobal($event.target.value, 'contains')">
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 2.25em">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align: center" [ngClass]="col.field === 'iconFlAtivo' || col.field === 'id' ? 'colunasFixas' : 'colunasDinamicas'">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-evento let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td>
+          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns" [ngClass]="col.field === 'iconFlAtivo' || col.field === 'sla' ? 'tableCentralizada' : 'tableEsquerda'">
+          <span [innerHTML]="col.field === 'dataCriacao' ? (rowData[col.field] | date:'dd/MM/yyyy HH:mm:ss') : rowData[col.field]"></span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</mk-box>
+
+<app-mti-nova-funcionalidade *ngIf="displayDialog" [tituloModal]="tituloModal" [funcionalidade]="funcionalidadeSelecionada" [displayDialog]="displayDialog" (salvarFuncionalidadeNotificacao)="obterTodos()"></app-mti-nova-funcionalidade>
