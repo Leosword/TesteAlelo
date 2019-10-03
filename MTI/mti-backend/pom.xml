@@ -112,8 +112,6 @@
 
 
 		<!-- BANCO DE DADOS -->
-		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc6</artifactId> 
-			<version>11.2.0.3</version> </dependency> -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -137,15 +135,6 @@
 			<version>2.7.0</version>
 			<scope>compile</scope>
 		</dependency>
-
-
-		<!-- APIS UTEIS NETSERVICOS COTI -->
-		<!-- <dependency> <groupId>br.com.netservicos</groupId> <artifactId>ldap-service</artifactId> 
-			<version>1.0.14-RELEASE</version> </dependency> <dependency> <groupId>br.com.netservicos</groupId> 
-			<artifactId>ca-service</artifactId> <version>1.0.6-RELEASE</version> </dependency> 
-			<dependency> <groupId>br.com.netservicos</groupId> <artifactId>java-util</artifactId> 
-			<version>1.0.2-RELEASE</version> </dependency> <dependency> <groupId>br.com.netservicos</groupId> 
-			<artifactId>mail-service</artifactId> <version>1.0.11.RELEASE</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.json</groupId>
@@ -203,8 +192,6 @@
 				<spring.datasource.password>password</spring.datasource.password>
 				<spring.datasource.driver-class-name>org.h2.Driver</spring.datasource.driver-class-name>
 				<spring.jpa.database-platform>org.hibernate.dialect.H2Dialect</spring.jpa.database-platform>
-				<!-- <logging.level.org.hibernate.SQL>debug</logging.level.org.hibernate.SQL> 
-					<logging.level.org.hibernate.type.descriptor.sql>trace</logging.level.org.hibernate.type.descriptor.sql> -->
 
 				<!-- QUARTZ LOCAL -->
 				<quartz.autostartup>false</quartz.autostartup>
@@ -280,10 +267,4 @@
 			</build>
 		</profile>
 	</profiles>
-
-	<!-- <repositories> <repository> <id>maven-group</id> <url>http://10.29.220.10:9081/repository/maven-group/</url> 
-		</repository> </repositories> <distributionManagement> <snapshotRepository> 
-		<id>nexus-snapshots</id> <url>http://10.29.220.10:9081/repository/maven-snapshots/</url> 
-		</snapshotRepository> <repository> <id>nexus-releases</id> <url>http://10.29.220.10:9081/repository/maven-releases/</url> 
-		</repository> </distributionManagement> -->
 </project>
