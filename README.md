@@ -49,6 +49,10 @@ protected void configure(HttpSecurity http) throws Exception {
 ## Built With
 * [Maven](https://maven.apache.org/) - Dependency Management
 
+## Admin Access
+* Usuario:admin
+* Senha:#nettools@
+
 ## Authors
 
 * **Leandro Celestino**
