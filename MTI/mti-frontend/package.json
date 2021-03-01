@@ -51,7 +51,7 @@
     "font-awesome": "^4.7.0",
     "ionicons": "^2.0.1",
     "primeng": "^5.2.4",
-    "prismjs": "^1.8.4",
+    "prismjs": "^1.23.0",
     "rxjs": "^5.5.2",
     "sweetalert2": "^7.18.0",
     "typescript": "^2.6.2",
